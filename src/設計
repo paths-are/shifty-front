@@ -1,0 +1,22 @@
+root.tsx
+--year
+--month
+--table
+  --title
+  --datas, checkboxes
+--insertButton
+
+
+GoogleCalendarのカラーIDの参考はこちら。
+https://developers.google.com/apps-script/reference/calendar/event-color
+下記のようなHexでの指定だとエラーになる。
+https://lukeboyle.com/blog-posts/2016/04/google-calendar-api---color-id
+
+■今後の展望
+・イベント登録中にbackdropアイコンを表示する。
+　→できれば、100%の横棒がおしゃれ。
+・予定の登録完了アラートを表示する
+・年月を選べるようにする
+・カラーを選べるようにする
+・予定のタイトルを選べるようにする
+・予定の種類を追加する
