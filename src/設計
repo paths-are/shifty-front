@@ -20,3 +20,13 @@ https://lukeboyle.com/blog-posts/2016/04/google-calendar-api---color-id
 ・カラーを選べるようにする
 ・予定のタイトルを選べるようにする
 ・予定の種類を追加する
+
+■メモ
+muiをssrとcsrのclassNameが違うと怒られていたが、
+npm run build 
+npm run start
+npm run dev 
+で解決するようになった。
+
+その前に、_app.jsと_document.jsとtheme.jsを入れたことも、解決したあるかもしれない。
+あと、.babelrcも。

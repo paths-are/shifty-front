@@ -20,8 +20,13 @@ const EventInsertToGoogleCalendarButton = (props) => {
     `&access_type=offline`;
 
   return (
+    // <Button variant="contained" color="primary">
+    //   Primary
+    // </Button>
     <Button
-      variant="outlined"
+      variant="contained"
+      // variant="outlined"
+      style={{ float: "right", margin: "10px 0" }}
       color="primary"
       onClick={() => {
         props.onClickHandler();

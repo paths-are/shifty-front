@@ -1,24 +1,31 @@
 import { useRouter } from "next/router";
 import React from "react";
-import DateTable from "../src/DateTable";
+import BasicTable from "../src/components/BasicTable";
+import ShiftTypesForm from "../src/components/ShiftTypesForm";
+import AppHeader from "../src/components/AppHeader";
 
 export default function Home() {
   const router = useRouter();
   const GOOGLE_CALENDAR_AUTH_CODE = router.query.code
     ? router.query.code
     : null;
-  const TITLE_HAYA = "早番";
-  const TITLE_OSO = "遅番";
-  const START_TIME_HAYA = "11:30:00";
-  const START_TIME_OSO = "13:30:00";
-  const END_TIME_HAYA = "21:00:00";
-  const END_TIME_OSO = "23:00:00";
-  const COLOR_ID_HAYA = "2";
-  const COLOR_ID_OSO = "10";
+  const [shiftTypes, setShiftTypes] = React.useState({
+    1: {
+      title: "早番",
+      startTime: "11:30:00",
+      endTime: "21:00:00",
+      colorId: "2",
+    },
+    2: {
+      title: "遅番",
+      startTime: "13:30:00",
+      endTime: "23:00:00",
+      colorId: "10",
+    },
+  });
   const YEAR = 2021;
   const MONTH = 2;
   var data = {};
-  const [backdropOpen, setBackdropOpen] = React.useState(false);
 
   React.useEffect(() => {
     // authCodeをアクセストークンに変換
@@ -79,13 +86,13 @@ export default function Home() {
                 case "1" /* 早番の時 */:
                   data = {
                     start: {
-                      dateTime: `${YEAR}-${MONTH}-${iIndex}T${START_TIME_HAYA}+09:00`,
+                      dateTime: `${YEAR}-${MONTH}-${iIndex}T${shiftTypes[1]["startTime"]}+09:00`,
                     },
                     end: {
-                      dateTime: `${YEAR}-${MONTH}-${iIndex}T${END_TIME_HAYA}+09:00`,
+                      dateTime: `${YEAR}-${MONTH}-${iIndex}T${shiftTypes[1]["endTime"]}+09:00`,
                     },
-                    summary: TITLE_HAYA,
-                    colorId: COLOR_ID_HAYA,
+                    summary: shiftTypes[1]["title"],
+                    colorId: shiftTypes[1]["colorId"],
                   };
                   insertEvent(accessToken, data);
                   // insertEvent(accessToken, data).then((value) => {
@@ -95,13 +102,13 @@ export default function Home() {
                 case "2" /* 遅番の時 */:
                   data = {
                     start: {
-                      dateTime: `${YEAR}-${MONTH}-${iIndex}T${START_TIME_OSO}+09:00`,
+                      dateTime: `${YEAR}-${MONTH}-${iIndex}T${shiftTypes[2]["startTime"]}+09:00`,
                     },
                     end: {
-                      dateTime: `${YEAR}-${MONTH}-${iIndex}T${END_TIME_OSO}+09:00`,
+                      dateTime: `${YEAR}-${MONTH}-${iIndex}T${shiftTypes[2]["endTime"]}+09:00`,
                     },
-                    summary: TITLE_OSO,
-                    colorId: COLOR_ID_OSO,
+                    summary: shiftTypes[2]["title"],
+                    colorId: shiftTypes[2]["colorId"],
                   };
                   insertEvent(accessToken, data);
                   continue;
@@ -113,29 +120,84 @@ export default function Home() {
           }
         },
         (resolve) => {
-          console.log(resolve);
+          // console.log(resolve);
         }
       );
     }
   });
 
+  React.useEffect(() => {
+    var wbsSiftTypes = localStorage.getItem("shift-types");
+    if (wbsSiftTypes) {
+      wbsSiftTypes = JSON.parse(wbsSiftTypes);
+      setShiftTypes(wbsSiftTypes);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem("shift-types", JSON.stringify(shiftTypes));
+    // console.log(localStorage.getItem("shift-types"));
+  }, [shiftTypes]);
+
+  const handleChangeShiftTypes = (event, label) => {
+    if (event.target.name === "1") {
+      if (label === "タイトル") {
+        setShiftTypes({
+          ...shiftTypes,
+          [1]: { ...shiftTypes[1], title: event.target.value },
+        });
+      }
+      if (label === "開始") {
+        setShiftTypes({
+          ...shiftTypes,
+          [1]: { ...shiftTypes[1], startTime: event.target.value },
+        });
+      }
+      if (label === "終了") {
+        setShiftTypes({
+          ...shiftTypes,
+          [1]: { ...shiftTypes[1], endTime: event.target.value },
+        });
+      }
+    }
+    if (event.target.name === "2") {
+      if (label === "タイトル") {
+        setShiftTypes({
+          ...shiftTypes,
+          [2]: { ...shiftTypes[2], title: event.target.value },
+        });
+      }
+      if (label === "開始") {
+        setShiftTypes({
+          ...shiftTypes,
+          [2]: { ...shiftTypes[2], startTime: event.target.value },
+        });
+      }
+      if (label === "終了") {
+        setShiftTypes({
+          ...shiftTypes,
+          [2]: { ...shiftTypes[2], endTime: event.target.value },
+        });
+      }
+    }
+  };
+
   return (
-    <div style={{ width: "80%", margin: "0 auto" }}>
-      <h1>シフト登録</h1>
-      <b>シフト勤務時間</b>
-      <p>
-        早番：{START_TIME_HAYA} - {END_TIME_HAYA}
-      </p>
-      <p>
-        遅番：{START_TIME_OSO} - {END_TIME_OSO}
-      </p>
-      <b>年月</b>
-      <p>
-        {YEAR}年{MONTH}月
-      </p>
-      <div>
-        <DateTable />
-      </div>
+    <div>
+      <AppHeader>
+        <ShiftTypesForm
+          shiftTypes={JSON.stringify(shiftTypes)}
+          handleChange={handleChangeShiftTypes}
+        />
+        <BasicTable
+          year={YEAR}
+          month={MONTH}
+          shiftTypes={JSON.stringify(shiftTypes)}
+          // onClickHandler={() => {
+          //   localStorage.setItem("shift-types", JSON.stringify(shiftTypes));
+          // }}
+        />
+      </AppHeader>
     </div>
   );
 }
