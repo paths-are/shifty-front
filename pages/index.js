@@ -38,12 +38,16 @@ export default function Home() {
 
     // authCodeをアクセストークンに変換
     const getAccessToken = async (authCode) => {
+      const hostName =
+        location.hostname === "localhost"
+          ? "localhost:3000"
+          : location.hostname;
       var url = "https://accounts.google.com/o/oauth2/token";
       var data = {
         client_id:
           "697184433971-mp8k45hsejd45k18gkltetn2fgh63rr3.apps.googleusercontent.com",
         client_secret: "K4ywtPu0NBG5MyBG533jOMH6",
-        redirect_uri: "http://localhost:3000?event=insert",
+        redirect_uri: `http://${hostName}?event=insert`,
         grant_type: "authorization_code",
         code: authCode,
       };
