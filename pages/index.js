@@ -9,6 +9,9 @@ export default function Home() {
   const GOOGLE_CALENDAR_AUTH_CODE = router.query.code
     ? router.query.code
     : null;
+  const OPEN_EXTERNAL_BROWSER = router.query.openExternalBrowser
+    ? router.query.openExternalBrowser
+    : null;
   const [shiftTypes, setShiftTypes] = React.useState({
     1: {
       title: "早番",
@@ -28,6 +31,10 @@ export default function Home() {
   var data = {};
 
   React.useEffect(() => {
+    if (OPEN_EXTERNAL_BROWSER) {
+      router.push("./");
+    }
+
     // authCodeをアクセストークンに変換
     const getAccessToken = async (authCode) => {
       var url = "https://accounts.google.com/o/oauth2/token";
