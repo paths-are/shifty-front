@@ -32,7 +32,6 @@ function HideOnScroll(props: Props) {
 }
 
 export default function AppHeader(props: Props) {
-  // console.log(props.children);
   return (
     <React.Fragment>
       <CssBaseline />

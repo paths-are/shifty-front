@@ -16,6 +16,9 @@ export default class MyDocument extends Document {
           /> */}
         </Head>
         <body style={{ backgroundColor: "#f7fafc" }}>
+          {/* <script src="/__/firebase/8.2.2/firebase-app.js"></script>
+          <script src="/__/firebase/8.2.2/firebase-analytics.js"></script>
+          <script src="/__/firebase/init.js"></script> */}
           <Main />
           <NextScript />
         </body>

@@ -30,3 +30,7 @@ npm run dev
 
 その前に、_app.jsと_document.jsとtheme.jsを入れたことも、解決したあるかもしれない。
 あと、.babelrcも。
+
+□Todo
+Google 認証
+日本語設定にする
