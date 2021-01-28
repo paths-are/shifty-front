@@ -7,8 +7,16 @@ import Paper from "@material-ui/core/Paper";
 
 const workTimes = [
   {
+    value: "11:00:00",
+    label: "11:00",
+  },
+  {
     value: "11:30:00",
     label: "11:30",
+  },
+  {
+    value: "13:00:00",
+    label: "13:00",
   },
   {
     value: "13:30:00",

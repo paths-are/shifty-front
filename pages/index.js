@@ -3,6 +3,7 @@ import React from "react";
 import BasicTable from "../src/components/BasicTable";
 import ShiftTypesForm from "../src/components/ShiftTypesForm";
 import AppHeader from "../src/components/AppHeader";
+// import Firebase from "../src/components/Firebase";
 import { isPropertyAccessChain } from "typescript";
 
 export default function Home() {
