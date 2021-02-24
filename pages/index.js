@@ -29,7 +29,7 @@ export default function Home() {
     },
   });
   const YEAR = 2021;
-  const MONTH = 2;
+  const MONTH = 3;
   var data = {};
 
   React.useEffect(() => {
@@ -94,7 +94,7 @@ export default function Home() {
               workShifts = JSON.parse(workShifts);
             }
             var workShiftLength = Object.keys(workShifts).length;
-            for (var iIndex = 1; iIndex < workShiftLength; iIndex++) {
+            for (var iIndex = 1; iIndex <= workShiftLength; iIndex++) {
               switch (workShifts[iIndex]) {
                 case "1" /* 早番の時 */:
                   data = {

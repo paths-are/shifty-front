@@ -10,7 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
-import EventInsertToGoogleCalendarButton from "./EventInsertToGoogleCalendarButton";
+import EventInsertToGoogleCalendarButton from "../src/components/EventInsertToGoogleCalendarButton";
 import Typography from "@material-ui/core/Typography";
 
 const workTimes = [
