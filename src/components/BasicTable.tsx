@@ -31,11 +31,11 @@ const useStyles = makeStyles({
 export default function BasicTable(props) {
   const classes = useStyles();
   var checkArray = {};
-  for (var iDate = 1; iDate <= 31; iDate++) {
+  for (var iDate = 1; iDate <= 30; iDate++) {
     checkArray[iDate] = "0";
   }
   var dates = [];
-  for (iDate = 1; iDate <= 31; iDate++) {
+  for (iDate = 1; iDate <= 30; iDate++) {
     dates.push(iDate);
   }
   const [checks, setChecks] = React.useState(checkArray);
