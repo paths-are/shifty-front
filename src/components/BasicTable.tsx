@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     width: "100%",
   },
   container: {
-    maxHeight: 440,
+    maxHeight: 480,
   },
   table: {
     minWidth: 300,
@@ -31,11 +31,12 @@ const useStyles = makeStyles({
 export default function BasicTable(props) {
   const classes = useStyles();
   var checkArray = {};
-  for (var iDate = 1; iDate <= 30; iDate++) {
+  const date = 30;
+  for (var iDate = 1; iDate <= date; iDate++) {
     checkArray[iDate] = "0";
   }
   var dates = [];
-  for (iDate = 1; iDate <= 30; iDate++) {
+  for (iDate = 1; iDate <= date; iDate++) {
     dates.push(iDate);
   }
   const [checks, setChecks] = React.useState(checkArray);

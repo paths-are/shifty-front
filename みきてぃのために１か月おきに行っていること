@@ -1,0 +1,12 @@
+１．Monthの更新
+pages/index.js
+32行目：const MONTH = 6;を更新
+
+２．日付の更新
+src/components/BasicTable.tsx
+34行目：const date = 30;を更新
+
+３．デプロイ
+git add .
+git commit -m '6月版'
+git push origin master:tmpShifty",
