@@ -9,4 +9,4 @@ src/components/BasicTable.tsx
 ３．デプロイ
 git add .
 git commit -m '6月版'
-git push origin master:tmpShifty",
+git push origin master:tmpShifty"
