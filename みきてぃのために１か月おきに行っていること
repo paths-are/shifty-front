@@ -10,3 +10,6 @@ src/components/BasicTable.tsx
 git add .
 git commit -m '6月版'
 git push origin main:tmpShifty
+
+４．みきに下記URLを送付
+shifty.racsche.com?openExternalBrowser=1
