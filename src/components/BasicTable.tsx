@@ -30,17 +30,25 @@ const useStyles = makeStyles({
 
 export default function BasicTable(props) {
   const classes = useStyles();
-  var checkArray = {};
-  const date = 30;
-  for (var iDate = 1; iDate <= date; iDate++) {
-    checkArray[iDate] = "0";
-  }
-  var dates = [];
-  for (iDate = 1; iDate <= date; iDate++) {
-    dates.push(iDate);
-  }
+  const [checkArray, setCheckArray] = React.useState({});
+  // var checkArray = {};
+  // const date = 30;
+  // for (var iDate = 1; iDate <= date; iDate++) {
+  //   checkArray[iDate] = "0";
+  // }
+  // var dates = [];
+  // for (iDate = 1; iDate <= date; iDate++) {
+  //   dates.push(iDate);
+  // }
+  // const [dates, setDates] = React.useState([]);
+  const [dates, setDates] = React.useState([1, 2, 3]);
   const [checks, setChecks] = React.useState(checkArray);
   const shiftTypes = JSON.parse(props.shiftTypes);
+
+  const retrieveLastday = function (y, m) {
+    console.log(y, m);
+    return new Date(y, m + 1, 0).getDate();
+  };
 
   React.useEffect(() => {
     var workShifts = localStorage.getItem("work-shifts");
@@ -49,6 +57,25 @@ export default function BasicTable(props) {
       setChecks(workShifts);
     }
   }, []);
+
+  React.useEffect(() => {
+    let lastday = retrieveLastday(props.year, props.month - 1);
+
+    // const date = 30;
+    console.log(lastday);
+    const date = lastday;
+    let checkArray = {};
+    for (var iDate = 1; iDate <= date; iDate++) {
+      checkArray[iDate] = "0";
+    }
+    setCheckArray(checkArray);
+    var dates = [];
+    for (iDate = 1; iDate <= date; iDate++) {
+      dates.push(iDate);
+    }
+    setDates(dates);
+    console.log(props.month);
+  }, [props.month]);
 
   function handleChange(event: any, newValue) {
     // console.log(newValue);
