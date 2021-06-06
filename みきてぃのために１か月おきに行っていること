@@ -8,7 +8,7 @@ src/components/BasicTable.tsx
 
 ３．デプロイ
 git add .
-git commit -m '6月版'
+git commit -m 'ミキティが毎月自分でできるように更新'
 git push origin main:tmpShifty
 
 ４．みきに下記URLを送付

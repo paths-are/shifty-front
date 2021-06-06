@@ -82,6 +82,18 @@ export default function BasicTable(props) {
     setChecks({ ...checks, [event.target.name]: event.target.value });
   }
 
+  const getDayJp = (date) => {
+    // console.log(date);
+    let targetDate = new Date(props.year, props.month - 1, date);
+    // let targetDate = new Date(
+    //   `${props.year}/${props.month}/${date}T00:00:00+09:00`
+    // );
+    // console.log(targetDate);
+    const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+    // console.log(weekdays[targetDate.getDay()]);
+    return weekdays[targetDate.getDay()];
+  };
+
   return (
     <>
       <Typography align="center" variant="h6" component="h6" gutterBottom>
@@ -109,7 +121,9 @@ export default function BasicTable(props) {
           <TableBody>
             {dates.map((date) => (
               <TableRow key={date}>
-                <TableCell align="center">{date}</TableCell>
+                <TableCell align="center">{`${date}(${getDayJp(
+                  date
+                )})`}</TableCell>
                 <TableCell align="center">
                   <Checkbox
                     checked={checks[date] === "1"}
