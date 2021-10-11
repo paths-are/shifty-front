@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     width: "100%",
   },
   container: {
-    maxHeight: 440,
+    maxHeight: 480,
   },
   table: {
     minWidth: 300,
@@ -30,16 +30,25 @@ const useStyles = makeStyles({
 
 export default function BasicTable(props) {
   const classes = useStyles();
-  var checkArray = {};
-  for (var iDate = 1; iDate <= 30; iDate++) {
-    checkArray[iDate] = "0";
-  }
-  var dates = [];
-  for (iDate = 1; iDate <= 30; iDate++) {
-    dates.push(iDate);
-  }
+  const [checkArray, setCheckArray] = React.useState({});
+  // var checkArray = {};
+  // const date = 30;
+  // for (var iDate = 1; iDate <= date; iDate++) {
+  //   checkArray[iDate] = "0";
+  // }
+  // var dates = [];
+  // for (iDate = 1; iDate <= date; iDate++) {
+  //   dates.push(iDate);
+  // }
+  // const [dates, setDates] = React.useState([]);
+  const [dates, setDates] = React.useState([1, 2, 3]);
   const [checks, setChecks] = React.useState(checkArray);
   const shiftTypes = JSON.parse(props.shiftTypes);
+
+  const retrieveLastday = function (y, m) {
+    console.log(y, m);
+    return new Date(y, m + 1, 0).getDate();
+  };
 
   React.useEffect(() => {
     var workShifts = localStorage.getItem("work-shifts");
@@ -49,10 +58,41 @@ export default function BasicTable(props) {
     }
   }, []);
 
+  React.useEffect(() => {
+    let lastday = retrieveLastday(props.year, props.month - 1);
+
+    // const date = 30;
+    console.log(lastday);
+    const date = lastday;
+    let checkArray = {};
+    for (var iDate = 1; iDate <= date; iDate++) {
+      checkArray[iDate] = "0";
+    }
+    setCheckArray(checkArray);
+    var dates = [];
+    for (iDate = 1; iDate <= date; iDate++) {
+      dates.push(iDate);
+    }
+    setDates(dates);
+    console.log(props.month);
+  }, [props.month]);
+
   function handleChange(event: any, newValue) {
     // console.log(newValue);
     setChecks({ ...checks, [event.target.name]: event.target.value });
   }
+
+  const getDayJp = (date) => {
+    // console.log(date);
+    let targetDate = new Date(props.year, props.month - 1, date);
+    // let targetDate = new Date(
+    //   `${props.year}/${props.month}/${date}T00:00:00+09:00`
+    // );
+    // console.log(targetDate);
+    const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+    // console.log(weekdays[targetDate.getDay()]);
+    return weekdays[targetDate.getDay()];
+  };
 
   return (
     <>
@@ -81,7 +121,9 @@ export default function BasicTable(props) {
           <TableBody>
             {dates.map((date) => (
               <TableRow key={date}>
-                <TableCell align="center">{date}</TableCell>
+                <TableCell align="center">{`${date}(${getDayJp(
+                  date
+                )})`}</TableCell>
                 <TableCell align="center">
                   <Checkbox
                     checked={checks[date] === "1"}

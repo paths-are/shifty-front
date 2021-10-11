@@ -1,0 +1,15 @@
+１．Monthの更新
+pages/index.js
+32行目：const MONTH = 6;を更新
+
+２．日付の更新
+src/components/BasicTable.tsx
+34行目：const date = 30;を更新
+
+３．デプロイ
+git add .
+git commit -m 'ミキティが毎月自分でできるように更新'
+git push origin main:tmpShifty
+
+４．みきに下記URLを送付
+shifty.racsche.com?openExternalBrowser=1
