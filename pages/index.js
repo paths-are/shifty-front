@@ -45,7 +45,7 @@ export default function Home() {
       colorId: "10",
     },
   });
-  const YEAR = 2021;
+  const YEAR = 2022;
   // const MONTH = 6;
   var data = {};
 
